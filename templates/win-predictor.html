@@ -36,5 +36,47 @@
         <button type="button">Predict!</button>
     </div>
 
+    <script type="text/python">
+
+        from browser import document, ajax, console
+        import json
+        
+        def get_input_coefficients():
+            a1 = document['a1'].value
+            a2 = document['a2'].value
+            a3 = document['a3'].value
+            a4 = document['a4'].value
+            a5 = document['a5'].value
+
+            b1 = document['b1'].value
+            b2 = document['b2'].value
+            b3 = document['b3'].value
+            b4 = document['b4'].value
+            b5 = document['b5'].value
+
+            return {'a1': str(a1),
+                    'a2': str(a2),
+                    'a3': str(a3),
+                    'a4': str(a4),
+                    'a5': str(a5),
+                    'b1': str(b1),
+                    'b2': str(b2),
+                    'b3': str(b3),
+                    'b4': str(b4),
+                    'b5': str(b5)}
+        
+        def send_coefficient_json(coefficients):
+            req = ajax.Ajax()
+            req.bind('complete', console.log)
+            req.open('POST',
+                        '/solve',
+                        True)
+            req.set_header('Content-Type', 'application/json')
+            req.send(json.dumps(coefficients))
+        
+        
+        </script>
+        
+
 </body>
 </html>
