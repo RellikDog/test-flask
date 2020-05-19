@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
     return render_template('win-predictor.html')
 
@@ -25,7 +25,8 @@ def solve():
     prediction = pred(team_a, team_b)
     return jsonify({'prediction': prediction})
 
-def pred():
+def pred(a, b):
+    print(a, b)
     return 'Team A wins!'
 
 if __name__ == '__main__':
